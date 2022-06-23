@@ -1,5 +1,5 @@
 // react
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 // additional functional
 import dataContext from "./context";
@@ -12,7 +12,17 @@ import './app.scss'
 
 function App() {
   // * data
-  const [data, setData] = useState({})
+  const [data, setData] = useState({
+    sidebar: {
+      section: localStorage.getItem('section'),
+      isActive: true
+    }
+  })
+
+  // * effect
+  useEffect(() => {
+    localStorage.setItem('section', data.sidebar.section)
+  }, [data.sidebar.section])
 
   return (
     <dataContext.Provider value={{ data, setData }}>

@@ -12,6 +12,10 @@
     color: $secondTextColor;
   }
 
+  &__top-list {
+    margin-bottom: 0.625rem;
+  }
+
   &__content-title {
     color: $secondTextColor;
   }
@@ -20,11 +24,26 @@
     display: flex;
     align-items: center;
     padding: 0.625rem;
+
+    svg {
+      width: 1.125rem;
+      height: 1.125rem;
+      margin-right: 0.625rem;
+    }
   }
 
   &__item--active {
     position: relative;
     box-shadow: 0px 5px 25px 3px rgba(33, 191, 115, 0.25);
+
+    svg {
+      fill: #ffffff;
+
+      path {
+        stroke: #ffffff;
+        fill: #ffffff;
+      }
+    }
 
     h3 {
       color: $textColor;

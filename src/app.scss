@@ -1,0 +1,8 @@
+.money-manager {
+  display: flex;
+  height: 100vh;
+
+  &__main {
+    flex: 0 1 80%;
+  }
+}

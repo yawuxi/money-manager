@@ -1,0 +1,51 @@
+@import "../scss/color-vars.scss";
+
+.sidebar {
+  flex: 0 1 20%;
+  min-width: 150px;
+  background-color: $secondColor;
+  padding: 0.9375rem;
+  z-index: 1000;
+
+  &__title {
+    font-size: 1.25rem;
+    color: $secondTextColor;
+  }
+
+  &__content-title {
+    color: $secondTextColor;
+  }
+
+  &__item {
+    display: flex;
+    align-items: center;
+    padding: 0.625rem;
+  }
+
+  &__item--active {
+    position: relative;
+    box-shadow: 0px 5px 25px 3px rgba(33, 191, 115, 0.25);
+
+    h3 {
+      color: $textColor;
+    }
+
+    &::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: $accentGreenColor;
+      z-index: -1;
+      border-radius: 0.3125rem;
+    }
+  }
+
+  &__img {
+    width: 1.125rem;
+    height: 1.125rem;
+    margin-right: 0.4375rem;
+  }
+}

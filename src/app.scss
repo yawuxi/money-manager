@@ -10,3 +10,15 @@
     background-color: $mainColor;
   }
 }
+
+// media queries
+
+// * width
+@media (max-width: 768.99px) {
+  .money-manager {
+    &__main {
+      margin-bottom: calc((100 / 768) * 60%);
+      flex: 0 1 100%;
+    }
+  }
+}

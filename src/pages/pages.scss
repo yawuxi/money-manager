@@ -2,7 +2,13 @@
 .overview {
   height: 100%;
 
-  &__top {
+  &__top-section {
+    display: flex;
+    gap: 0.9375rem;
+    height: 50%;
+  }
+
+  &__bottom-section {
     display: flex;
     gap: 0.9375rem;
     height: 50%;

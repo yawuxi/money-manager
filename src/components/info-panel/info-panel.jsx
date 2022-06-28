@@ -17,7 +17,7 @@ function InfoPanel({ type = 'incomes' }) {
   const whichScroll = type === 'incomes' ? 'info-panel-list incomes-scroll' : 'info-panel-list expenses-scroll'
 
   const infoPanelListItem = ({ amount, text }) => {
-    const whichAmount = type === 'incomes' ? <span className="incomes-glowing">{amount}</span> : <span className="expenses-glowing">{amount}</span>
+    const whichAmount = type === 'incomes' ? <span className="info-panel-list__amount info-panel-list__amount-incomes">{amount}</span> : <span className="info-panel-list__amount info-panel-list__amount-expenses">{amount}</span>
     return <li key={nextId()} className="info-panel-list__item">{whichAmount} from <span className="info-panel-list__text">{text}</span></li>
   }
 

@@ -2,3 +2,28 @@
 
 @import "./scss/null.scss";
 @import "./scss/ui.scss";
+
+// media queries
+@media (max-width: 768.99px) {
+  html {
+    font-size: 90%;
+  }
+}
+
+@media (max-width: 500.99px) {
+  html {
+    font-size: 80%;
+  }
+}
+
+@media (max-width: 450.99px) {
+  html {
+    font-size: 70%;
+  }
+}
+
+@media (max-width: 400.99px) {
+  html {
+    font-size: 60%;
+  }
+}

@@ -1,0 +1,28 @@
+@import "../../scss/color-vars.scss";
+
+.info-panel {
+  flex: 0 1 50%;
+  background-color: $secondColor;
+  border-radius: 0.625rem;
+
+  &__title {
+    margin-bottom: 0.3125rem;
+  }
+
+  .divider {
+    margin-bottom: 0.3125rem;
+  }
+}
+
+.info-panel-list {
+  height: calc(100% - 1.875rem - 0.625rem);
+  overflow-y: auto;
+
+  &__item {
+    color: $textColor;
+  }
+
+  &__text {
+    color: $secondTextColor;
+  }
+}

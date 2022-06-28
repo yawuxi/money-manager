@@ -1,11 +1,12 @@
 // react
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
 // additional functional
 import dataContext from "./context";
 
 // components
 import Sidebar from "./sidebar/sidebar";
+import Overview from "./pages/overview";
 
 // styles
 import './app.scss'
@@ -13,23 +14,58 @@ import './app.scss'
 function App() {
   // * data
   const [data, setData] = useState({
-    sidebar: {
-      section: localStorage.getItem('section') || 'Overview',
-      isActive: true
-    }
+    incomes: [
+      { amount: 500, text: 'example text' },
+      { amount: 1000, text: 'example text' },
+      { amount: 3120, text: 'example text' },
+      { amount: 8000, text: 'example text' },
+      { amount: 500, text: 'example text' },
+      { amount: 1000, text: 'example text' },
+      { amount: 3120, text: 'example text' },
+      { amount: 8000, text: 'example text' },
+      { amount: 500, text: 'example text' },
+      { amount: 1000, text: 'example text' },
+      { amount: 3120, text: 'example text' },
+      { amount: 8000, text: 'example text' },
+      { amount: 500, text: 'example text' },
+      { amount: 1000, text: 'example text' },
+      { amount: 3120, text: 'example text' },
+      { amount: 8000, text: 'example text' },
+      { amount: 500, text: 'example text' },
+      { amount: 1000, text: 'example text' },
+      { amount: 3120, text: 'example text' },
+      { amount: 8000, text: 'example text' },
+      { amount: 500, text: 'example text' },
+      { amount: 1000, text: 'example text' },
+      { amount: 3120, text: 'example text' },
+      { amount: 8000, text: 'example text' },
+    ],
+    expenses: [
+      { amount: 100, text: 'example text' },
+      { amount: 14, text: 'example text' },
+      { amount: 300, text: 'example text' },
+      { amount: 450, text: 'example text' },
+      { amount: 100, text: 'example text' },
+      { amount: 14, text: 'example text' },
+      { amount: 300, text: 'example text' },
+      { amount: 450, text: 'example text' },
+      { amount: 100, text: 'example text' },
+      { amount: 14, text: 'example text' },
+      { amount: 300, text: 'example text' },
+      { amount: 450, text: 'example text' },
+      { amount: 100, text: 'example text' },
+      { amount: 14, text: 'example text' },
+      { amount: 300, text: 'example text' },
+      { amount: 450, text: 'example text' },
+    ],
   })
-
-  // * effects
-  useEffect(() => {
-    localStorage.setItem('section', data.sidebar.section)
-  }, [data.sidebar.section])
 
   return (
     <dataContext.Provider value={{ data, setData }}>
       <div className="money-manager">
-        <Sidebar data={data} setData={setData} />
+        <Sidebar />
         <main className="money-manager__main">
-
+          <Overview />
         </main>
       </div>
     </dataContext.Provider >

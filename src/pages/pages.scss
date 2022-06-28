@@ -1,0 +1,10 @@
+// * overview
+.overview {
+  height: 100%;
+
+  &__top {
+    display: flex;
+    gap: 0.9375rem;
+    height: 50%;
+  }
+}

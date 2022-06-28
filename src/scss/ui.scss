@@ -1,3 +1,69 @@
+@import "./color-vars.scss";
+
+// * common
+.p-15 {
+  padding: 0.9375rem;
+}
+
+.title {
+  font-size: 1.25rem;
+  color: $textColor;
+}
+
+.divider {
+  width: 100%;
+  height: 1px;
+  background-color: $secondTextColor;
+}
+
+// * effects
+.incomes-glowing {
+  color: $accentGreenColor;
+  text-shadow: 0 0 0.3125rem $accentGreenColor;
+}
+
+.expenses-glowing {
+  color: $accentRedColor;
+  text-shadow: 0 0 0.3125rem $accentRedColor;
+}
+
 .green-box-shadow {
   box-shadow: 0px 5px 25px 3px rgba(33, 191, 115, 0.25);
+}
+
+// * scroll
+.incomes-scroll {
+  &::-webkit-scrollbar {
+    background-color: $mainColor;
+    border-radius: 10px;
+    width: 1rem;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: $secondColor;
+    border-radius: 10px;
+    box-shadow: inset 1px 1px 0.625rem $accentGreenColor;
+  }
+
+  &::-webkit-scrollbar-thumb:hover {
+    box-shadow: inset 1px 1px 0.75rem $accentGreenColor;
+  }
+}
+
+.expenses-scroll {
+  &::-webkit-scrollbar {
+    background-color: $mainColor;
+    border-radius: 10px;
+    width: 1.125rem;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: $secondColor;
+    border-radius: 10px;
+    box-shadow: inset 1px 1px 0.625rem $accentRedColor;
+  }
+
+  &::-webkit-scrollbar-thumb:hover {
+    box-shadow: inset 1px 1px 0.75rem $accentRedColor;
+  }
 }

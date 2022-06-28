@@ -1,21 +1,36 @@
+// react
+import { useState, useEffect } from 'react'
+
 // styles
 import './sidebar.scss'
 
-function Sidebar({ data, setData }) {
+function Sidebar() {
 
+  // * sidebarState
+  const [sidebarState, setSidebarState] = useState({
+    section: localStorage.getItem('section') || 'Overview',
+    isActive: true
+  })
+
+  // * effects
+  useEffect(() => {
+    localStorage.setItem('section', sidebarState.section)
+  }, [sidebarState.section])
+
+  // * methods
   const whichSectionActive = (section) => {
-    const res = data.sidebar.section === section ? 'sidebar__item sidebar__item--active' : 'sidebar__item'
+    const res = sidebarState.section === section ? 'sidebar__item sidebar__item--active' : 'sidebar__item'
     return res
   }
 
   return (
-    <aside className="sidebar">
+    <aside className="sidebar p-15">
       <nav>
         <h2 className="sidebar__title">Pages</h2>
         <ul className="sidebar__top-list">
           <li
             className={whichSectionActive('Overview')}
-            onClick={() => setData(state => ({ ...state, sidebar: { ...state.sidebar, section: 'Overview' } }))}
+            onClick={() => setSidebarState(state => ({ ...state, section: 'Overview' }))}
           >
             <svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M1.78571 0.5H8.92857C9.63865 0.5 10.2143 1.07563 10.2143 1.78571V8.92857C10.2143 9.63865 9.63865 10.2143 8.92857 10.2143H1.78571C1.07563 10.2143 0.5 9.63865 0.5 8.92857V1.78571C0.5 1.07563 1.07563 0.5 1.78571 0.5Z" fill="#707175" fillOpacity="0.5" stroke="#707175" />
@@ -27,7 +42,7 @@ function Sidebar({ data, setData }) {
           </li>
           <li
             className={whichSectionActive('Budget')}
-            onClick={() => setData(state => ({ ...state, sidebar: { ...state.sidebar, section: 'Budget' } }))}
+            onClick={() => setSidebarState(state => ({ ...state, section: 'Budget' }))}
           >
             <svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M15.625 4.6875H9.375L7.06055 1.21484C6.71387 0.695312 7.08496 0 7.70996 0H17.29C17.915 0 18.2861 0.695312 17.9395 1.21484L15.625 4.6875ZM9.375 6.25H15.625C15.8105 6.37207 16.0205 6.50879 16.2158 6.66016C19.0283 8.43262 25 12.251 25 20.3125C25 22.9004 22.9004 25 20.3125 25H4.6875C2.09863 25 0 22.9004 0 20.3125C0 12.251 5.97168 8.43262 8.74023 6.66016C8.97949 6.50879 9.18945 6.37207 9.375 6.25ZM13.4814 10.9375C13.4814 10.3955 13.042 9.95605 12.4561 9.95605C11.958 9.95605 11.5186 10.3955 11.5186 10.9375V11.2305C11.2451 11.2891 10.9424 11.3721 10.7422 11.4795C10.0146 11.8115 9.37988 12.4268 9.22363 13.3203C9.13574 13.8184 9.18457 14.3018 9.38965 14.7363C9.59473 15.166 9.91211 15.4687 10.2344 15.6885C10.8008 16.0742 11.5479 16.2988 12.1191 16.4697L12.2266 16.499C12.9102 16.709 13.3691 16.8604 13.6572 17.0703C13.7793 17.1582 13.8232 17.2266 13.8379 17.2705C13.8574 17.3096 13.8867 17.3975 13.8525 17.5928C13.8232 17.7637 13.7305 17.9102 13.4619 18.0225C13.1641 18.1494 12.6807 18.2129 12.0557 18.1152C11.7627 18.0664 11.2402 17.8906 10.7764 17.7344C10.6689 17.6953 10.5615 17.6611 10.4639 17.627C9.95117 17.4561 9.39941 17.7344 9.22852 18.2471C9.05762 18.7598 9.33594 19.3115 9.84863 19.4385C9.90723 19.502 9.98047 19.5264 10.0635 19.5557C10.4053 19.6875 11.0547 19.8926 11.5186 20V20.3125C11.5186 20.8545 11.958 21.2939 12.4561 21.2939C13.042 21.2939 13.4814 20.8545 13.4814 20.3125V20.0439C13.7402 19.9951 13.9941 19.8779 14.2285 19.8193C15 19.4922 15.6152 18.8574 15.7764 17.9297C15.8643 17.4219 15.8252 16.9336 15.6299 16.4893C15.4395 16.0498 15.1318 15.7275 14.8047 15.4932C14.2139 15.0586 13.4229 14.8242 12.832 14.6436L12.749 14.6338C12.0996 14.4238 11.6309 14.2773 11.333 14.0723C11.2061 13.9844 11.167 13.9258 11.1572 13.9014C11.1475 13.8818 11.1182 13.8232 11.1475 13.6572C11.167 13.5596 11.2402 13.3984 11.5479 13.2617C11.8213 13.1201 12.3486 13.042 12.9443 13.0908C13.1592 13.1689 13.8184 13.2959 14.0088 13.3447C14.5264 13.4863 15.0635 13.1738 15.2002 12.6514C15.3418 12.1338 15.0293 11.5967 14.5068 11.46C14.292 11.4014 13.8037 11.3037 13.4814 11.2451V10.9375Z" fill="#707175" />
@@ -39,7 +54,7 @@ function Sidebar({ data, setData }) {
         <ul>
           <li
             className={whichSectionActive('Settings')}
-            onClick={() => setData(state => ({ ...state, sidebar: { ...state.sidebar, section: 'Settings' } }))}
+            onClick={() => setSidebarState(state => ({ ...state, section: 'Settings' }))}
           >
             <svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M12.5 7.69231C9.82143 7.69231 7.69231 9.82143 7.69231 12.5C7.69231 15.1786 9.82143 17.3077 12.5 17.3077C15.1786 17.3077 17.3077 15.1786 17.3077 12.5C17.3077 9.82143 15.1786 7.69231 12.5 7.69231ZM12.5 15.9341C10.5769 15.9341 9.06593 14.4231 9.06593 12.5C9.06593 10.5769 10.5769 9.06593 12.5 9.06593C14.4231 9.06593 15.9341 10.5769 15.9341 12.5C15.9341 14.4231 14.4231 15.9341 12.5 15.9341Z" fill="#707175" />

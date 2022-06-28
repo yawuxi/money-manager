@@ -4,7 +4,6 @@
   flex: 0 1 20%;
   min-width: 150px;
   background-color: $secondColor;
-  padding: 0.9375rem;
   z-index: 1000;
 
   &__title {
@@ -24,6 +23,7 @@
     display: flex;
     align-items: center;
     padding: 0.625rem;
+    cursor: pointer;
 
     svg {
       width: 1.125rem;

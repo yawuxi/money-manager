@@ -3,10 +3,12 @@ import { useState } from "react";
 
 // additional functional
 import dataContext from "./context";
+import { Routes, Route } from 'react-router-dom'
 
 // components
 import Sidebar from "./sidebar/sidebar";
 import Overview from "./pages/overview";
+import Budget from "./pages/budget";
 
 // styles
 import './app.scss'
@@ -65,7 +67,10 @@ function App() {
       <div className="money-manager">
         <Sidebar />
         <main className="money-manager__main">
-          <Overview />
+          <Routes>
+            <Route path="/" element={<Overview />} />
+            <Route path="/budget" element={<Budget />} />
+          </Routes>
         </main>
       </div>
     </dataContext.Provider >

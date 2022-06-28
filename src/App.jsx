@@ -14,12 +14,12 @@ function App() {
   // * data
   const [data, setData] = useState({
     sidebar: {
-      section: localStorage.getItem('section'),
+      section: localStorage.getItem('section') || 'Overview',
       isActive: true
     }
   })
 
-  // * effect
+  // * effects
   useEffect(() => {
     localStorage.setItem('section', data.sidebar.section)
   }, [data.sidebar.section])

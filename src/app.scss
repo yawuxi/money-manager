@@ -1,8 +1,12 @@
+@import "./scss/color-vars.scss";
+
 .money-manager {
   display: flex;
   height: 100vh;
+  min-height: 500px;
 
   &__main {
     flex: 0 1 80%;
+    background-color: $mainColor;
   }
 }

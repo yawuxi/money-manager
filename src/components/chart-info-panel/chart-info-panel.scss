@@ -1,0 +1,11 @@
+.chart-info-panel {
+  flex: 0 1 50%;
+
+  &__chart {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 99%;
+    height: 100%;
+  }
+}

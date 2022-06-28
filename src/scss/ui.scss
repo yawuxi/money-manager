@@ -19,12 +19,12 @@
 // * effects
 .incomes-glowing {
   color: $accentGreenColor;
-  text-shadow: 0 0 0.3125rem $accentGreenColor;
+  text-shadow: 0 0 5px $accentGreenColor;
 }
 
 .expenses-glowing {
   color: $accentRedColor;
-  text-shadow: 0 0 0.3125rem $accentRedColor;
+  text-shadow: 0 0 5px $accentRedColor;
 }
 
 .green-box-shadow {

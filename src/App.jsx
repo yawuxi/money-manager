@@ -9,6 +9,7 @@ import { Routes, Route } from 'react-router-dom'
 import Sidebar from "./sidebar/sidebar";
 import Overview from "./pages/overview";
 import Budget from "./pages/budget";
+import Settings from './pages/settings'
 
 // styles
 import './app.scss'
@@ -70,6 +71,7 @@ function App() {
           <Routes>
             <Route path="/" element={<Overview />} />
             <Route path="/budget" element={<Budget />} />
+            <Route path="/settings" element={<Settings />} />
           </Routes>
         </main>
       </div>

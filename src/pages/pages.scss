@@ -1,28 +1,27 @@
 // * overview
 .overview {
-  height: 100%;
+  height: inherit;
   display: flex;
   flex-direction: column;
   gap: 0.9375rem;
 
   &__top-section {
+    height: 50%;
     display: flex;
     gap: 0.9375rem;
-    flex: 0 1 50%;
-    height: 100%;
   }
 
   &__bottom-section {
+    height: 50%;
     display: flex;
     gap: 0.9375rem;
-    flex: 0 1 50%;
-    height: 100%;
   }
 }
 
-// media queries
+// media quries
+
 // * width
-@media (max-width: 600.99px) {
+@media (max-width: 470.99px) {
   .overview {
     &__top-section {
       flex-direction: column;

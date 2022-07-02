@@ -4,19 +4,9 @@
   border-radius: 0.625rem;
   background-color: $secondColor;
   flex: 0 1 50%;
-  width: 99%;
-  height: 100%;
 
   &__chart {
-    width: inherit;
-    height: inherit;
-    max-height: 400px;
-    margin: 0 auto;
-  }
-}
-
-@media (max-width: 768.99px) {
-  .chart-info-panel__chart {
-    width: 250px;
+    height: calc(100% - 2.5rem);
+    width: 99%;
   }
 }

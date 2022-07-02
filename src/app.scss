@@ -7,6 +7,7 @@
 
   &__main {
     flex: 0 1 80%;
+    height: 100%;
     background-color: $mainColor;
   }
 }
@@ -17,13 +18,13 @@
 @media (max-width: 768.99px) {
   .money-manager {
     &__main {
-      margin-bottom: 65px;
+      padding-bottom: 65px;
       flex: 0 1 100%;
     }
   }
 }
 
-@media (max-width: 600.99px) {
+@media (max-width: 470.99px) {
   .money-manager {
     height: auto;
   }

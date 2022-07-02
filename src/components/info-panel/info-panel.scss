@@ -4,6 +4,7 @@
   flex: 0 1 50%;
   background-color: $secondColor;
   border-radius: 0.625rem;
+  height: 100%;
 
   &__title {
     margin-bottom: 0.3125rem;
@@ -15,7 +16,7 @@
 }
 
 .info-panel-list {
-  height: calc(100% - 1.875rem - 0.625rem);
+  max-height: calc(100% - 1.875rem - 0.3125rem * 2);
   overflow-y: auto;
 
   &__item {
@@ -36,5 +37,14 @@
 
   &__text {
     color: $secondTextColor;
+  }
+}
+
+// media queries
+
+// * width
+@media (max-width: 470.99px) {
+  .info-panel-list {
+    height: 200px;
   }
 }

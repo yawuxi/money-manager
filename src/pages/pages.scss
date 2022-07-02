@@ -1,16 +1,35 @@
 // * overview
 .overview {
   height: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 0.9375rem;
 
   &__top-section {
     display: flex;
     gap: 0.9375rem;
-    height: 50%;
+    flex: 0 1 50%;
+    height: 100%;
   }
 
   &__bottom-section {
     display: flex;
     gap: 0.9375rem;
-    height: 50%;
+    flex: 0 1 50%;
+    height: 100%;
+  }
+}
+
+// media queries
+// * width
+@media (max-width: 600.99px) {
+  .overview {
+    &__top-section {
+      flex-direction: column;
+    }
+
+    &__bottom-section {
+      flex-direction: column;
+    }
   }
 }

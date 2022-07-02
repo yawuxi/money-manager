@@ -1,11 +1,22 @@
+@import "../../scss/ui.scss";
+
 .chart-info-panel {
+  border-radius: 0.625rem;
+  background-color: $secondColor;
   flex: 0 1 50%;
+  width: 99%;
+  height: 100%;
 
   &__chart {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 99%;
-    height: 100%;
+    width: inherit;
+    height: inherit;
+    max-height: 400px;
+    margin: 0 auto;
+  }
+}
+
+@media (max-width: 768.99px) {
+  .chart-info-panel__chart {
+    width: 250px;
   }
 }

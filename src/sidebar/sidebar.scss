@@ -133,3 +133,19 @@
     display: flex;
   }
 }
+
+@media (max-width: 320.99px) {
+  .sidebar-mobile {
+    .sidebar__top-list {
+      .sidebar__item--active {
+        &::after {
+          width: 75%;
+          height: 115%;
+          left: 50%;
+          top: 50%;
+          transform: translateX(-50%) translateY(-50%);
+        }
+      }
+    }
+  }
+}

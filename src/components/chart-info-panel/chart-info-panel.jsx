@@ -16,6 +16,8 @@ function ChartInfoPanel({ type = 'incomes' }) {
   const { data } = useContext(dataContext)
 
   // * chartsSettings
+  const chartTitleClass = type === 'incomes' ? 'incomes-glowing' : 'expenses-glowing'
+  const chartTitle = type === 'incomes' ? 'Incomes' : 'Expenses'
   const calcLabels = type === 'incomes' ? data.incomes.map(item => item.text) : data.expenses.map(item => item.text)
   const calcData = type === 'incomes' ? data.incomes.map(item => item.amount) : data.expenses.map(item => item.amount)
 
@@ -23,7 +25,6 @@ function ChartInfoPanel({ type = 'incomes' }) {
     labels: calcLabels,
     datasets: [
       {
-        label: '# of Votes',
         data: calcData,
         backgroundColor: [
           'rgba(255, 99, 132, 0.2)',
@@ -53,6 +54,7 @@ function ChartInfoPanel({ type = 'incomes' }) {
 
   return (
     <div className="chart-info-panel p-15">
+      <h2 className="chart-info-panel__title title"><span className={chartTitleClass}>{chartTitle}</span> chart</h2>
       <div className="chart-info-panel__chart">
         <Doughnut data={chartData} options={chartOptions} />
       </div>

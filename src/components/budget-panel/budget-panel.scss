@@ -1,0 +1,111 @@
+@import "../../scss/color-vars.scss";
+
+.budget-panel {
+  flex: 0 1 50%;
+  background-color: $secondColor;
+  border-radius: 0.625rem;
+  height: inherit;
+
+  &__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    button {
+      position: relative;
+      width: 40px;
+      height: 40px;
+      border: none;
+      border-radius: 0.625rem;
+      margin-bottom: 0.3125rem;
+
+      &::before {
+        content: "";
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translateX(-50%) translateY(-50%);
+        width: 70%;
+        height: 4px;
+        background-color: #fff;
+        border-radius: 0.3125rem;
+      }
+
+      &::after {
+        content: "";
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translateX(-50%) translateY(-50%) rotate(90deg);
+        width: 70%;
+        height: 4px;
+        background-color: #fff;
+        border-radius: 0.3125rem;
+      }
+    }
+  }
+
+  .divider {
+    margin-bottom: 0.3125rem;
+  }
+}
+
+.budget-panel-list {
+  text-align: center;
+  overflow-y: auto;
+  height: calc(100% - 1.875rem - 1.25rem);
+  padding-right: 1rem;
+
+  &__title {
+    color: $secondTextColor;
+  }
+
+  &__item {
+    background-color: $mainColor;
+    border-radius: 0.3125rem;
+    padding: 0.3125rem;
+    border: 1px solid transparent;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    &:not(:last-child) {
+      margin-bottom: 0.625rem;
+    }
+  }
+
+  &__value {
+    word-break: break-all;
+    color: $textColor;
+  }
+}
+
+// media queries
+
+// * width
+@media (max-width: 768.99px) {
+  .budget-panel {
+    &__header {
+      button {
+        position: relative;
+        width: 30px;
+        height: 30px;
+        border: none;
+        border-radius: 0.625rem;
+        margin-bottom: 0.3125rem;
+      }
+    }
+  }
+}
+
+@media (max-width: 470.99px) {
+  .budget-panel {
+    height: calc(100vh - 90px);
+  }
+}
+
+@media (max-width: 400.99px) {
+  .budget-panel-list {
+    height: calc(100% - 1.875rem - 1.25rem * 2);
+  }
+}

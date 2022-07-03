@@ -3,19 +3,22 @@
   height: inherit;
   display: flex;
   flex-direction: column;
-  gap: 0.9375rem;
 
   &__top-section {
     height: 50%;
     display: flex;
-    gap: 0.9375rem;
   }
 
   &__bottom-section {
     height: 50%;
     display: flex;
-    gap: 0.9375rem;
   }
+}
+
+// * budget
+.budget {
+  display: flex;
+  height: inherit;
 }
 
 // media quries

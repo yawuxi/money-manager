@@ -4,6 +4,10 @@
 @import "./scss/ui.scss";
 @import "./pages/pages.scss";
 
+body {
+  background-color: $mainColor;
+}
+
 // media queries
 @media (max-width: 768.99px) {
   html {

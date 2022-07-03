@@ -1,3 +1,5 @@
+@import "../scss/color-vars.scss";
+
 // * overview
 .overview {
   height: inherit;
@@ -21,11 +23,64 @@
   height: inherit;
 }
 
+// * settings
+.settings {
+  height: 100vh;
+
+  &__content {
+    display: flex;
+    justify-content: space-between;
+    height: calc(100% - 3.125rem);
+  }
+
+  &__title {
+    margin-bottom: 0.9375rem;
+  }
+
+  &__col {
+    flex: 0 1 50%;
+    height: 100%;
+    min-height: 200px;
+    border-radius: 0.625rem;
+    background-color: $secondColor;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  button {
+    color: $textColor;
+    border-radius: 0.625rem;
+    padding: 0.3125rem;
+  }
+}
+
+.settings-categories {
+  width: 100%;
+  overflow-y: auto;
+  margin-bottom: 0.9375rem;
+
+  &__item {
+    text-align: center;
+    color: $textColor;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid $iconColor;
+
+    &:not(:last-child) {
+      margin-bottom: 0.3125rem;
+    }
+  }
+}
 // media quries
 
-// * width
+// * overview queries
 @media (max-width: 470.99px) {
   .overview {
+    padding-bottom: 80px !important;
+
     &__top-section {
       flex-direction: column;
     }
@@ -33,5 +88,12 @@
     &__bottom-section {
       flex-direction: column;
     }
+  }
+}
+
+// * settings
+@media (max-width: 768.99px) {
+  .settings {
+    height: calc(100vh - 65px);
   }
 }

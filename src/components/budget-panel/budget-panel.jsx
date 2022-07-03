@@ -141,4 +141,3 @@ function BudgetAddModal({ type, closeModal }) {
 }
 
 export default BudgetPanel
-export { BudgetAddModal }

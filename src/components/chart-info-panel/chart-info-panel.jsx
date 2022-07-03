@@ -5,6 +5,7 @@ import { useContext } from 'react';
 import dataContext from '../../context';
 import 'chart.js/auto';
 import { Doughnut } from 'react-chartjs-2';
+import useTitle from '../../hooks/title.hook';
 
 // components
 
@@ -12,13 +13,11 @@ import { Doughnut } from 'react-chartjs-2';
 import './chart-info-panel.scss'
 
 function ChartInfoPanel({ type = 'incomes' }) {
-  // * dataFromContext
   const { data } = useContext(dataContext)
+  const { setTitleByType } = useTitle()
 
   // * chartsSettings
-  const chartTitleClass = type === 'incomes' ? 'incomes-glowing' : 'expenses-glowing'
-  const chartTitle = type === 'incomes' ? 'Incomes' : 'Expenses'
-  const calcLabels = type === 'incomes' ? data.incomes.map(item => item.text) : data.expenses.map(item => item.text)
+  const calcLabels = type === 'incomes' ? data.incomes.map(item => item.category) : data.expenses.map(item => item.category)
   const calcData = type === 'incomes' ? data.incomes.map(item => item.amount) : data.expenses.map(item => item.amount)
 
   const chartData = {
@@ -54,7 +53,7 @@ function ChartInfoPanel({ type = 'incomes' }) {
 
   return (
     <div className="chart-info-panel p-15">
-      <h2 className="chart-info-panel__title title"><span className={chartTitleClass}>{chartTitle}</span> chart</h2>
+      <h2 className="chart-info-panel__title title">{setTitleByType(type)} chart</h2>
       <div className="chart-info-panel__chart">
         <Doughnut data={chartData} options={chartOptions} />
       </div>

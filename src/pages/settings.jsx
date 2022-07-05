@@ -85,7 +85,7 @@ function Settings() {
 }
 
 function SettingsAddModal({ type, closeModal }) {
-  const { setData } = useContext(dataContext)
+  const { data, setData } = useContext(dataContext)
   const [category, setCategory] = useState('')
   const { setTitleByType } = useTitle()
 
@@ -100,6 +100,13 @@ function SettingsAddModal({ type, closeModal }) {
         ...state,
         incomesCategories: [...state.incomesCategories, category]
       }))
+
+      // & localStorage
+      const newIncomesCategoriesForLS = {
+        ...data,
+        incomesCategories: [...data.incomesCategories, category]
+      }
+      localStorage.setItem('data', JSON.stringify(newIncomesCategoriesForLS))
     }
 
     if (type === 'expenses' && category !== '') {
@@ -107,6 +114,13 @@ function SettingsAddModal({ type, closeModal }) {
         ...state,
         expensesCategories: [...state.expensesCategories, category]
       }))
+
+      // & localStorage
+      const newExpensesCategoriesForLS = {
+        ...data,
+        expensesCategories: [...data.expensesCategories, category]
+      }
+      localStorage.setItem('data', JSON.stringify(newExpensesCategoriesForLS))
     }
 
     closeModal(e)

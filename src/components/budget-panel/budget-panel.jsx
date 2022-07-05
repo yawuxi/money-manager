@@ -99,6 +99,13 @@ function BudgetAddModal({ type, closeModal }) {
         ...state,
         incomes: [...state.incomes, { amount: formValues.amount, category: formValues.category }]
       }))
+
+      // & localStorage
+      const newIncomesForLS = {
+        ...data,
+        incomes: [...data.incomes, { amount: formValues.amount, category: formValues.category }]
+      }
+      localStorage.setItem('data', JSON.stringify(newIncomesForLS))
     }
 
     if (type === 'expenses' && formValues.amount !== '') {
@@ -106,6 +113,13 @@ function BudgetAddModal({ type, closeModal }) {
         ...state,
         expenses: [...state.expenses, { amount: formValues.amount, category: formValues.category }]
       }))
+
+      // & localStorage
+      const newExpensesForLS = {
+        ...data,
+        expenses: [...data.expenses, { amount: formValues.amount, category: formValues.category }]
+      }
+      localStorage.setItem('data', JSON.stringify(newExpensesForLS))
     }
 
     closeModal(e)

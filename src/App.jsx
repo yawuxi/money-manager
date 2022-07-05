@@ -1,5 +1,5 @@
 // react
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 // additional functional
 import dataContext from "./context";
@@ -17,21 +17,38 @@ import './app.scss'
 function App() {
   // * data
   const [data, setData] = useState({
-    incomes: [
-      { amount: 500, category: 'example category' },
-      { amount: 1000, category: 'example category' },
-      { amount: 3120, category: 'example category' },
-      { amount: 8000, category: 'example category' },
-    ],
-    expenses: [
-      { amount: 100, category: 'example category' },
-      { amount: 14, category: 'example category' },
-      { amount: 300, category: 'example category' },
-      { amount: 450, category: 'example category' },
-    ],
-    incomesCategories: ['buisness', 'work', 'salary'],
-    expensesCategories: ['food', 'games', 'family'],
+    incomes: [],
+    expenses: [],
+    incomesCategories: [],
+    expensesCategories: [],
   })
+
+  // * useEffect
+  useEffect(() => {
+    if (!localStorage.getItem('data')) {
+      const data = {
+        incomes: [
+          { amount: 500, category: 'example category' },
+          { amount: 1000, category: 'example category' },
+          { amount: 3120, category: 'example category' },
+          { amount: 8000, category: 'example category' },
+        ],
+        expenses: [
+          { amount: 100, category: 'example category' },
+          { amount: 14, category: 'example category' },
+          { amount: 300, category: 'example category' },
+          { amount: 450, category: 'example category' },
+        ],
+        incomesCategories: ['buisness', 'work', 'salary'],
+        expensesCategories: ['food', 'games', 'family'],
+      }
+
+      localStorage.setItem('data', JSON.stringify(data))
+      setData(data)
+    } else {
+      setData(JSON.parse(localStorage.getItem('data')))
+    }
+  }, [])
 
   return (
     <dataContext.Provider value={{ data, setData }}>

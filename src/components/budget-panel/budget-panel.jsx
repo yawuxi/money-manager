@@ -8,6 +8,7 @@ import useTitle from '../../hooks/title.hook';
 import { useFormik } from 'formik';
 import * as Yup from 'yup'
 import { motion } from 'framer-motion'
+import nextId from 'react-id-generator';
 
 // components
 
@@ -16,7 +17,7 @@ import './budget-panel.scss'
 import './budget-add-modal.scss'
 
 function BudgetPanel({ type }) {
-  const { data } = useContext(dataContext)
+  const { data, setData } = useContext(dataContext)
   const [isModalOpen, setIsModalOpen] = useState(false)
   const { setTitleByType } = useTitle()
 
@@ -30,6 +31,22 @@ function BudgetPanel({ type }) {
   const closeModal = (e) => {
     if (e.currentTarget === e.target) {
       setIsModalOpen(false)
+    }
+  }
+
+  const onRemoveItem = (id, type) => {
+    switch (type) {
+      case 'incomes':
+        // state
+        setData(state => ({ ...state, incomes: state.incomes.filter(item => item.id !== id) }))
+        // localStorage
+        localStorage.setItem('data', JSON.stringify({ ...data, incomes: JSON.parse(localStorage.getItem('data')).incomes.filter(item => item.id !== id) }))
+      case 'expenses':
+        setData(state => ({ ...state, expenses: state.expenses.filter(item => item.id !== id) }))
+        // localStorage
+        localStorage.setItem('data', JSON.stringify({ ...data, expenses: JSON.parse(localStorage.getItem('data')).expenses.filter(item => item.id !== id) }))
+      default:
+        break;
     }
   }
 
@@ -66,6 +83,11 @@ function BudgetPanel({ type }) {
           <p className="budget-panel-list__value incomes-glowing">{item.amount + '$'}</p>
           <h3 className="budget-panel-list__title">Category</h3>
           <p className="budget-panel-list__value">{item.category}</p>
+          <button className="budget-panel-list__remove" onClick={() => onRemoveItem(item.id, 'incomes')}>
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M14 11V16M4 6H20L18.42 20.22C18.3658 20.7094 18.1331 21.1616 17.7663 21.49C17.3994 21.8184 16.9244 22 16.432 22H7.568C7.07564 22 6.60056 21.8184 6.23375 21.49C5.86693 21.1616 5.63416 20.7094 5.58 20.22L4 6ZM7.345 3.147C7.50675 2.80397 7.76271 2.514 8.083 2.31091C8.4033 2.10782 8.77474 2 9.154 2H14.846C15.2254 1.99981 15.5971 2.10755 15.9176 2.31064C16.2381 2.51374 16.4942 2.80381 16.656 3.147L18 6H6L7.345 3.147V3.147ZM2 6H22H2ZM10 11V16V11Z" stroke="black" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
+          </button>
         </motion.li>
       )
     })
@@ -83,6 +105,11 @@ function BudgetPanel({ type }) {
           <p className="budget-panel-list__value expenses-glowing">{item.amount + '$'}</p>
           <h3 className="budget-panel-list__title">Category</h3>
           <p className="budget-panel-list__value">{item.category}</p>
+          <button className="budget-panel-list__remove" onClick={() => onRemoveItem(item.id, 'expenses')}>
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M14 11V16M4 6H20L18.42 20.22C18.3658 20.7094 18.1331 21.1616 17.7663 21.49C17.3994 21.8184 16.9244 22 16.432 22H7.568C7.07564 22 6.60056 21.8184 6.23375 21.49C5.86693 21.1616 5.63416 20.7094 5.58 20.22L4 6ZM7.345 3.147C7.50675 2.80397 7.76271 2.514 8.083 2.31091C8.4033 2.10782 8.77474 2 9.154 2H14.846C15.2254 1.99981 15.5971 2.10755 15.9176 2.31064C16.2381 2.51374 16.4942 2.80381 16.656 3.147L18 6H6L7.345 3.147V3.147ZM2 6H22H2ZM10 11V16V11Z" stroke="black" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
+          </button>
         </motion.li>
       )
     })
@@ -133,13 +160,13 @@ function BudgetAddModal({ type, closeModal }) {
       closeModal(e)
       setData(state => ({
         ...state,
-        incomes: [...state.incomes, { amount, category }]
+        incomes: [...state.incomes, { amount, category, id: nextId() }]
       }))
 
       // & localStorage
       const newIncomesForLS = {
         ...data,
-        incomes: [...data.incomes, { amount, category }]
+        incomes: [...data.incomes, { amount, category, id: nextId() }]
       }
       localStorage.setItem('data', JSON.stringify(newIncomesForLS))
     }
@@ -148,13 +175,13 @@ function BudgetAddModal({ type, closeModal }) {
       closeModal(e)
       setData(state => ({
         ...state,
-        expenses: [...state.expenses, { amount, category }]
+        expenses: [...state.expenses, { amount, category, id: nextId() }]
       }))
 
       // & localStorage
       const newExpensesForLS = {
         ...data,
-        expenses: [...data.expenses, { amount, category }]
+        expenses: [...data.expenses, { amount, category, id: nextId() }]
       }
       localStorage.setItem('data', JSON.stringify(newExpensesForLS))
     }

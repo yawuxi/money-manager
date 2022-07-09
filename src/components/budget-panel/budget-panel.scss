@@ -61,6 +61,7 @@
   }
 
   &__item {
+    position: relative;
     background-color: $mainColor;
     border-radius: 0.3125rem;
     padding: 0.3125rem;
@@ -77,6 +78,19 @@
   &__value {
     word-break: break-all;
     color: $textColor;
+  }
+
+  &__remove {
+    position: absolute;
+    top: 50%;
+    right: 5%;
+    transform: translateY(-50%);
+
+    svg {
+      path {
+        stroke: $accentRedColor;
+      }
+    }
   }
 }
 

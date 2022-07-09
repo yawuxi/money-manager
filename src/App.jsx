@@ -5,6 +5,7 @@ import { useState, useEffect } from "react";
 import dataContext from "./context";
 import { Routes, Route, useLocation } from 'react-router-dom'
 import { AnimatePresence } from 'framer-motion'
+import nextId from "react-id-generator";
 
 // components
 import Sidebar from "./sidebar/sidebar";
@@ -29,16 +30,16 @@ function App() {
     if (!localStorage.getItem('data')) {
       const data = {
         incomes: [
-          { amount: 500, category: 'example category' },
-          { amount: 1000, category: 'example category' },
-          { amount: 3120, category: 'example category' },
-          { amount: 8000, category: 'example category' },
+          { amount: 500, category: 'example category', id: nextId() },
+          { amount: 1000, category: 'example category', id: nextId() },
+          { amount: 3120, category: 'example category', id: nextId() },
+          { amount: 8000, category: 'example category', id: nextId() },
         ],
         expenses: [
-          { amount: 100, category: 'example category' },
-          { amount: 14, category: 'example category' },
-          { amount: 300, category: 'example category' },
-          { amount: 450, category: 'example category' },
+          { amount: 100, category: 'example category', id: nextId() },
+          { amount: 14, category: 'example category', id: nextId() },
+          { amount: 300, category: 'example category', id: nextId() },
+          { amount: 450, category: 'example category', id: nextId() },
         ],
         incomesCategories: ['buisness', 'work', 'salary'],
         expensesCategories: ['food', 'games', 'family'],

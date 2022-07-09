@@ -6,6 +6,8 @@ import { useState, useContext } from 'react';
 import dataContext from '../../context';
 import useTitle from '../../hooks/title.hook';
 import nextId from 'react-id-generator';
+import { useFormik } from 'formik';
+import * as Yup from 'yup'
 
 // components
 
@@ -79,50 +81,52 @@ function BudgetPanel({ type }) {
 
 function BudgetAddModal({ type, closeModal }) {
   const { data, setData } = useContext(dataContext)
-  const [formValues, setFormValues] = useState({
-    amount: '',
-    category: type === 'incomes' ? data.incomesCategories[0] : data.expensesCategories[0],
-  })
   const { setTitleByType } = useTitle()
 
-  // * methods
-  const onValueChange = (e) => {
-    setFormValues(state => ({
-      ...state,
-      [e.target.name]: e.target.value
-    }))
-  }
+  // * formik
+  const formik = useFormik({
+    initialValues: {
+      amount: '',
+      category: type === 'incomes' ? data.incomesCategories[0] : data.expensesCategories[0],
+    },
+    validationSchema: Yup.object({
+      amount: Yup.string().required('Укажите сумму!'),
+      category: Yup.string().required('Выберите категорию!')
+    }),
+    onSubmit: ({ amount, category }, e) => onAdd(amount, category, e)
+  })
 
-  const onAdd = (e) => {
-    if (type === 'incomes' && formValues.amount !== '') {
+  // * methods
+  function onAdd(amount, category, e) {
+    if (type === 'incomes' && amount !== '') {
+      closeModal(e)
       setData(state => ({
         ...state,
-        incomes: [...state.incomes, { amount: formValues.amount, category: formValues.category }]
+        incomes: [...state.incomes, { amount, category }]
       }))
 
       // & localStorage
       const newIncomesForLS = {
         ...data,
-        incomes: [...data.incomes, { amount: formValues.amount, category: formValues.category }]
+        incomes: [...data.incomes, { amount, category }]
       }
       localStorage.setItem('data', JSON.stringify(newIncomesForLS))
     }
 
-    if (type === 'expenses' && formValues.amount !== '') {
+    if (type === 'expenses' && amount !== '') {
+      closeModal(e)
       setData(state => ({
         ...state,
-        expenses: [...state.expenses, { amount: formValues.amount, category: formValues.category }]
+        expenses: [...state.expenses, { amount, category }]
       }))
 
       // & localStorage
       const newExpensesForLS = {
         ...data,
-        expenses: [...data.expenses, { amount: formValues.amount, category: formValues.category }]
+        expenses: [...data.expenses, { amount, category }]
       }
       localStorage.setItem('data', JSON.stringify(newExpensesForLS))
     }
-
-    closeModal(e)
   }
 
   // * conditionalsRender
@@ -136,21 +140,37 @@ function BudgetAddModal({ type, closeModal }) {
           <h2 className="budget-add-modal__title title">Add {setTitleByType(type)}</h2>
           <button onClick={closeModal}></button>
         </header>
-        <label>
-          Amount
-          <input type="number" name="amount" style={inputColor} onChange={onValueChange} value={formValues.amount} />
-        </label>
-        <label>
-          Category
-          <select name="category" onChange={onValueChange} value={formValues.category}>
-            {
-              type === 'incomes' ? data.incomesCategories.map(item => <option key={item} value={item}>{item}</option>) : data.expensesCategories.map(item => <option key={item} value={item}>{item}</option>)
-            }
-          </select>
-        </label>
-        <button className={buttonClass} onClick={onAdd}>ADD</button>
+        <form onSubmit={formik.handleSubmit}>
+          <label>
+            Amount
+            <input
+              type="number"
+              name="amount"
+              style={inputColor}
+              value={formik.values.amount}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+            />
+            {formik.errors.amount && formik.touched.amount ? <div style={{ color: 'red' }}>{formik.errors.amount}</div> : null}
+          </label>
+          <label>
+            Category
+            <select
+              name="category"
+              value={formik.values.category}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+            >
+              {
+                type === 'incomes' ? data.incomesCategories.map(item => <option key={item} value={item}>{item}</option>) : data.expensesCategories.map(item => <option key={item} value={item}>{item}</option>)
+              }
+            </select>
+            {formik.errors.category && formik.touched.category ? <div style={{ color: 'red' }}>{formik.errors.category}</div> : null}
+          </label>
+          <button className={buttonClass} type='submit'>ADD</button>
+        </form>
       </div>
-    </div>
+    </div >
   );
 }
 

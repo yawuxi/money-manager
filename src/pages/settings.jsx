@@ -4,6 +4,8 @@ import { useState, useContext } from 'react';
 // additional functional
 import useTitle from '../hooks/title.hook';
 import dataContext from '../context'
+import { useFormik } from 'formik';
+import * as Yup from 'yup'
 
 // components
 
@@ -86,16 +88,23 @@ function Settings() {
 
 function SettingsAddModal({ type, closeModal }) {
   const { data, setData } = useContext(dataContext)
-  const [category, setCategory] = useState('')
   const { setTitleByType } = useTitle()
 
-  // * methods
-  const onValueChange = (e) => {
-    setCategory(e.target.value)
-  }
+  // * formik
+  const formik = useFormik({
+    initialValues: {
+      category: '',
+    },
+    validationSchema: Yup.object({
+      category: Yup.string().required('Укажите категорию!')
+    }),
+    onSubmit: ({ category }, e) => onAdd(category, e)
+  })
 
-  const onAdd = (e) => {
+  // * methods
+  function onAdd(category, e) {
     if (type === 'incomes' && category !== '') {
+      closeModal(e)
       setData(state => ({
         ...state,
         incomesCategories: [...state.incomesCategories, category]
@@ -110,6 +119,7 @@ function SettingsAddModal({ type, closeModal }) {
     }
 
     if (type === 'expenses' && category !== '') {
+      closeModal(e)
       setData(state => ({
         ...state,
         expensesCategories: [...state.expensesCategories, category]
@@ -137,11 +147,20 @@ function SettingsAddModal({ type, closeModal }) {
           <h2 className="budget-add-modal__title title">Add {setTitleByType(type)}</h2>
           <button onClick={closeModal}></button>
         </header>
-        <label>
-          Category
-          <input type="text" name="category" style={inputColor} onChange={onValueChange} value={category} />
-        </label>
-        <button className={buttonClass} onClick={onAdd}>ADD</button>
+        <form onSubmit={formik.handleSubmit}>
+          <label>
+            Category
+            <input
+              type="text"
+              name="category"
+              style={inputColor}
+              value={formik.values.category}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur} />
+            {formik.errors.category && formik.touched.category ? <div style={{ color: 'red' }}>{formik.errors.category}</div> : null}
+          </label>
+          <button className={buttonClass} type="submit">ADD</button>
+        </form>
       </div>
     </div>
   );

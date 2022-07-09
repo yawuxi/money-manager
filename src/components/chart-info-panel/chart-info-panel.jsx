@@ -6,6 +6,7 @@ import dataContext from '../../context';
 import 'chart.js/auto';
 import { Doughnut } from 'react-chartjs-2';
 import useTitle from '../../hooks/title.hook';
+import { motion } from 'framer-motion'
 
 // components
 
@@ -52,12 +53,17 @@ function ChartInfoPanel({ type = 'incomes' }) {
   }
 
   return (
-    <div className="chart-info-panel p-15">
+    <motion.div
+      className="chart-info-panel p-15"
+      animate={{ scaleX: ['0%', '100%'] }}
+      transition={{ delay: 0.15 }}
+      exit={{ opacity: 0 }}
+    >
       <h2 className="chart-info-panel__title title">{setTitleByType(type)} chart</h2>
       <div className="chart-info-panel__chart">
         <Doughnut data={chartData} options={chartOptions} />
       </div>
-    </div>
+    </motion.div>
   );
 }
 

@@ -5,6 +5,7 @@ import { useContext } from 'react';
 import dataContext from '../../context';
 import nextId from 'react-id-generator';
 import useTitle from '../../hooks/title.hook';
+import { motion } from 'framer-motion'
 
 // components
 
@@ -24,13 +25,18 @@ function InfoPanel({ type = 'incomes' }) {
   }
 
   return (
-    <div className="info-panel p-15">
+    <motion.div
+      className="info-panel p-15"
+      animate={{ scaleX: ['0%', '100%'] }}
+      transition={{ delay: 0.15 }}
+      exit={{ opacity: 0 }}
+    >
       <div className="info-panel__title title">Last {setTitleByType(type)}</div>
       <div className="divider"></div>
       <ul className={whichScroll}>
         {type === 'incomes' ? data.incomes.map(item => infoPanelListItem(item)) : data.expenses.map(item => infoPanelListItem(item))}
       </ul>
-    </div>
+    </motion.div >
   );
 }
 

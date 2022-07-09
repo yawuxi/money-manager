@@ -6,6 +6,7 @@ import useTitle from '../hooks/title.hook';
 import dataContext from '../context'
 import { useFormik } from 'formik';
 import * as Yup from 'yup'
+import { motion } from 'framer-motion'
 
 // components
 
@@ -40,7 +41,12 @@ function Settings() {
   }
 
   return (
-    <div className="settings p-15">
+    <motion.div
+      className="settings p-15"
+      animate={{ opacity: 1 }}
+      initial={{ opacity: 0 }}
+      exit={{ opacity: 0 }}
+    >
       <h2 className="settings__title title">App settings</h2>
       <div className="settings__content g-15">
         <div className="settings__col p-15">
@@ -82,7 +88,7 @@ function Settings() {
       </div>
       {whichModal === 'incomes' ? <SettingsAddModal type={whichModal} closeModal={closeModal} /> : null}
       {whichModal === 'expenses' ? <SettingsAddModal type={whichModal} closeModal={closeModal} /> : null}
-    </div>
+    </motion.div>
   );
 }
 

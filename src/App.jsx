@@ -3,7 +3,8 @@ import { useState, useEffect } from "react";
 
 // additional functional
 import dataContext from "./context";
-import { Routes, Route } from 'react-router-dom'
+import { Routes, Route, useLocation } from 'react-router-dom'
+import { AnimatePresence } from 'framer-motion'
 
 // components
 import Sidebar from "./sidebar/sidebar";
@@ -50,16 +51,20 @@ function App() {
     }
   }, [])
 
+  const location = useLocation()
+
   return (
     <dataContext.Provider value={{ data, setData }}>
       <div className="money-manager">
         <Sidebar />
         <main className="money-manager__main">
-          <Routes>
-            <Route path="/" element={<Overview />} />
-            <Route path="/budget" element={<Budget />} />
-            <Route path="/settings" element={<Settings />} />
-          </Routes>
+          <AnimatePresence exitBeforeEnter>
+            <Routes location={location} key={location.pathname}>
+              <Route path="/" element={<Overview />} />
+              <Route path="/budget" element={<Budget />} />
+              <Route path="/settings" element={<Settings />} />
+            </Routes>
+          </AnimatePresence>
         </main>
       </div>
     </dataContext.Provider >

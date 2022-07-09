@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react'
 
 // additional funtional
 import { Link } from 'react-router-dom'
+import { motion } from 'framer-motion'
 
 // styles
 import './sidebar.scss'
@@ -26,15 +27,35 @@ function Sidebar() {
     return res
   }
 
+  // * framer-motion
+  const liVariants = {
+    visible: i => ({
+      y: '0%',
+      opacity: 1,
+      transition: { delay: i * .70 }
+    }),
+    hidden: {
+      y: '-25%',
+      opacity: 0
+    }
+  }
+
   return (
     <>
-      <aside className="sidebar p-15">
+      <motion.aside
+        className="sidebar p-15"
+        animate={{ x: ['-100%', '0%'] }}
+      >
         <nav>
           <h2 className="sidebar__title">Pages</h2>
           <ul className="sidebar__top-list">
-            <li
+            <motion.li
               className={whichSectionActive('Overview')}
               onClick={() => setSidebarState(state => ({ ...state, section: 'Overview' }))}
+              variants={liVariants}
+              initial='hidden'
+              animate='visible'
+              custom={1}
             >
               <Link to="/">
                 <svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -45,10 +66,14 @@ function Sidebar() {
                 </svg>
                 <h3 className="sidebar__content-title">Overview</h3>
               </Link>
-            </li>
-            <li
+            </motion.li>
+            <motion.li
               className={whichSectionActive('Budget')}
               onClick={() => setSidebarState(state => ({ ...state, section: 'Budget' }))}
+              variants={liVariants}
+              initial='hidden'
+              animate='visible'
+              custom={1.25}
             >
               <Link to="/budget">
                 <svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -56,13 +81,17 @@ function Sidebar() {
                 </svg>
                 <h3 className="sidebar__content-title">Budget</h3>
               </Link>
-            </li>
+            </motion.li>
           </ul>
           <h2 className="sidebar__title">Account</h2>
           <ul>
-            <li
+            <motion.li
               className={whichSectionActive('Settings')}
               onClick={() => setSidebarState(state => ({ ...state, section: 'Settings' }))}
+              variants={liVariants}
+              initial='hidden'
+              animate='visible'
+              custom={1.5}
             >
               <Link to="/settings">
                 <svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -71,10 +100,10 @@ function Sidebar() {
                 </svg>
                 <h3 className="sidebar__content-title">Settings</h3>
               </Link>
-            </li>
+            </motion.li>
           </ul>
         </nav>
-      </aside >
+      </motion.aside >
       <aside className="sidebar-mobile p-15">
         <nav>
           <ul className="sidebar__top-list">

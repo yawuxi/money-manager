@@ -35,19 +35,22 @@ function BudgetPanel({ type }) {
   }
 
   const onRemoveItem = (id, type) => {
-    switch (type) {
-      case 'incomes':
-        // state
-        setData(state => ({ ...state, incomes: state.incomes.filter(item => item.id !== id) }))
-        // localStorage
-        localStorage.setItem('data', JSON.stringify({ ...data, incomes: JSON.parse(localStorage.getItem('data')).incomes.filter(item => item.id !== id) }))
-      case 'expenses':
-        setData(state => ({ ...state, expenses: state.expenses.filter(item => item.id !== id) }))
-        // localStorage
-        localStorage.setItem('data', JSON.stringify({ ...data, expenses: JSON.parse(localStorage.getItem('data')).expenses.filter(item => item.id !== id) }))
-      default:
-        break;
-    }
+    setData(state => {
+      switch (type) {
+        case 'incomes':
+          // localStorage
+          localStorage.setItem('data', JSON.stringify({ ...data, incomes: JSON.parse(localStorage.getItem('data')).incomes.filter(item => item.id !== id) }))
+          // state
+          return { ...state, incomes: state.incomes.filter(item => item.id !== id) }
+        case 'expenses':
+          // localStorage
+          localStorage.setItem('data', JSON.stringify({ ...data, expenses: JSON.parse(localStorage.getItem('data')).expenses.filter(item => item.id !== id) }))
+          // state
+          return { ...state, expenses: state.expenses.filter(item => item.id !== id) }
+        default:
+          return state
+      }
+    })
   }
 
   // * conditionalsRender

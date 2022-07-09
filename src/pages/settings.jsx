@@ -27,13 +27,17 @@ function Settings() {
     }
   }
 
-  const deleteCategory = (categoriesType, key) => {
+  const deleteCategory = (categoriesType, item2) => {
     setData(state => {
       switch (categoriesType) {
         case 'incomes':
-          return { ...state, incomesCategories: state.incomesCategories.filter(item => item !== key) }
+          // localStorage
+          localStorage.setItem('data', JSON.stringify({ ...data, incomesCategories: JSON.parse(localStorage.getItem('data')).incomesCategories.filter(item => item !== item2) }))
+          return { ...state, incomesCategories: state.incomesCategories.filter(item => item !== item2) }
         case 'expenses':
-          return { ...state, expensesCategories: state.expensesCategories.filter(item => item !== key) }
+          // localStorage
+          localStorage.setItem('data', JSON.stringify({ ...data, expensesCategories: JSON.parse(localStorage.getItem('data')).expensesCategories.filter(item => item !== item2) }))
+          return { ...state, expensesCategories: state.expensesCategories.filter(item => item !== item2) }
         default:
           return state
       }
